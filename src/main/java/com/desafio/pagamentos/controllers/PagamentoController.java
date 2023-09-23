@@ -25,15 +25,9 @@ public class PagamentoController {
     @Autowired
     PagamentoService pagamentoService;
 
-    @GetMapping("/listar")
-    @ApiOperation("Lista todos os Pagamentos")
-    public ResponseEntity<List<PagamentoResponse>> buscarTodos(){
-        List<PagamentoResponse> pagamentos = pagamentoService.BuscarTodos();
-        return ResponseEntity.status(HttpStatus.OK).body(pagamentos);
-    }
-
     @GetMapping
-    @ApiOperation("Lista os pagamentos pelos filtros de Código Débito e/ou CPF/CNPJ e/ou Status do Pagamento")
+    @ApiOperation("Lista os pagamentos pelos filtros de Código Débito e/ou CPF/CNPJ e/ou Status do Pagament, caso nenhum filtro informado" +
+            "lista todos os pagamentos")
     public ResponseEntity<List<PagamentoResponse>> buscarFiltros(
             @RequestParam(value = "codigoDebito",defaultValue = "") @ApiParam(value = "Código do Débito") Integer codigoDebito,
             @RequestParam(value = "cpfCnpj",defaultValue = "")  @ApiParam(value = "CPF/CNPJ") String cpfCnpj,

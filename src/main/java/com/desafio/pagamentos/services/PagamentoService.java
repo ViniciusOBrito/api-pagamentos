@@ -53,12 +53,6 @@ public class PagamentoService {
         pagamentoRepository.delete(pagamento);
     }
 
-
-    @Transactional(readOnly = true)
-    public List<PagamentoResponse> BuscarTodos() {
-        return pagamentoRepository.findAll().stream().map(PagamentoResponse::new).collect(Collectors.toList());
-    }
-
     @Transactional(readOnly = true)
     public List<PagamentoResponse> buscarPorFiltros(Integer codigoDebito, String cpfCnpj, StatusPagamento statusPagamento) {
         return pagamentoRepository.buscarPorCodigoCpfStatus(codigoDebito, cpfCnpj, statusPagamento).stream().map(PagamentoResponse::new).collect(Collectors.toList());
