@@ -6,6 +6,7 @@ import com.desafio.pagamentos.domain.dtos.PagamentoResponse;
 
 import com.desafio.pagamentos.domain.enums.StatusPagamento;
 
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,20 @@ public class PagamentoController {
     PagamentoService pagamentoService;
 
     @GetMapping("/listar")
+    @ApiOperation("Lista todos os Pagamentos")
     public ResponseEntity<List<PagamentoResponse>> buscarTodos(){
         List<PagamentoResponse> pagamentos = pagamentoService.BuscarTodos();
         return ResponseEntity.status(HttpStatus.OK).body(pagamentos);
     }
 
     @GetMapping
+    @ApiOperation("Lista os pagamentos pelos filtros de Código Débito e/ou CPF/CNPJ e/ou Status do Pagamento")
     public ResponseEntity<List<PagamentoResponse>> buscarFiltros(
-            @RequestParam(value = "codigo",defaultValue = "") @ApiParam(value = "Codigo Débito") Integer codigoDebito,
+            @RequestParam(value = "codigoDebito",defaultValue = "") @ApiParam(value = "Código do Débito") Integer codigoDebito,
             @RequestParam(value = "cpfCnpj",defaultValue = "")  @ApiParam(value = "CPF/CNPJ") String cpfCnpj,
-            @RequestParam(value = "status",defaultValue = "") @ApiParam(value = "Status do pagamento") StatusPagamento status
+            @RequestParam(value = "statusPagamento",defaultValue = "") @ApiParam(value = "Status do pagamento") StatusPagamento statusPagamento
     ){
-        List<PagamentoResponse> pagamentos = pagamentoService.buscarPorFiltros(codigoDebito,cpfCnpj,status);
+        List<PagamentoResponse> pagamentos = pagamentoService.buscarPorFiltros(codigoDebito,cpfCnpj,statusPagamento);
         return ResponseEntity.status(HttpStatus.OK).body(pagamentos);
     }
 
@@ -56,7 +59,7 @@ public class PagamentoController {
     }
 
     @DeleteMapping("/{codigoDebito}")
-    public void deletarPagamento( @PathVariable @ApiParam (value = "Codigo Débito") Integer codigoDebito){
+    public void deletarPagamento( @PathVariable @ApiParam (value = "Código do Débito") Integer codigoDebito){
         pagamentoService.deletarPagamento(codigoDebito);
     }
 }

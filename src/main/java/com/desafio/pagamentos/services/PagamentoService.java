@@ -60,8 +60,8 @@ public class PagamentoService {
     }
 
     @Transactional(readOnly = true)
-    public List<PagamentoResponse> buscarPorFiltros(Integer codigoDebito, String cpfCnpj, StatusPagamento status) {
-        return pagamentoRepository.buscarPorCodigoCpfStatus(codigoDebito, cpfCnpj, status).stream().map(PagamentoResponse::new).collect(Collectors.toList());
+    public List<PagamentoResponse> buscarPorFiltros(Integer codigoDebito, String cpfCnpj, StatusPagamento statusPagamento) {
+        return pagamentoRepository.buscarPorCodigoCpfStatus(codigoDebito, cpfCnpj, statusPagamento).stream().map(PagamentoResponse::new).collect(Collectors.toList());
     }
 
 }

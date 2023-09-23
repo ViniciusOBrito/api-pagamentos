@@ -17,7 +17,7 @@ public interface PagamentoRepository extends JpaRepository<Pagamento,Integer> {
             "SELECT p FROM Pagamento p " +
             "WHERE (:codigoDebito IS NULL OR p.codigoDebito = :codigoDebito )" +
              "AND (:cpfCnpj = '' OR p.cpfCnpj = :cpfCnpj )" +
-            "AND (:status IS NULL OR p.status = :status )"
+            "AND (:statusPagamento IS NULL OR p.status = :statusPagamento )"
     )
-    List<Pagamento> buscarPorCodigoCpfStatus(Integer codigoDebito, String cpfCnpj, StatusPagamento status);
+    List<Pagamento> buscarPorCodigoCpfStatus(Integer codigoDebito, String cpfCnpj, StatusPagamento statusPagamento);
 }

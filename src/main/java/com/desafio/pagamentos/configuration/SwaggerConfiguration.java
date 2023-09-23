@@ -17,7 +17,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("API de Pagamentos")
-                .description("Solução do desafio de construção de uma API Rest para o recebimento de pagamentos de débitos de pessoas físicas e jurídicas.")
+                .description("Desafio técnico de uma API de pagamentos da FADESP")
                 .version("1.0")
                 .build();
     }
